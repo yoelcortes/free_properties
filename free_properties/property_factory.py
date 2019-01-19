@@ -128,7 +128,7 @@ def PropertyFactory(fget, fset=None, clsname=None, doc=None, units=None):
         
         .. code-block:: python
         
-            >>> weight_water.value -= 1000
+            >>> weight_water -= 1000
             >>> weight_water
             Weight(Water) -> 3000 (kg)
             >>> water_data  # The change also affects the original data

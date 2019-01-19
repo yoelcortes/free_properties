@@ -122,7 +122,7 @@ In place magic methods will also change the property value:
 
 .. code-block:: python
 
-    >>> weight_water.value -= 1000
+    >>> weight_water -= 1000
     >>> weight_water
     Weight(Water) -> 3000 (kg)
     >>> water_data  # The change also affects the original data
