@@ -1,0 +1,216 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>free_properties.subclasses &#8212; free_properties 2019 documentation</title>
+    <link rel="stylesheet" href="../../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">free_properties 2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for free_properties.subclasses</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Created on Fri Jan 18 14:19:27 2019</span>
+
+<span class="sd">@author: Guest Group</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">.free_property</span> <span class="k">import</span> <span class="n">FreeProperty</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Item&#39;</span><span class="p">,</span> <span class="s1">&#39;Attribute&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># %% Simple Property Classes                </span>
+
+<div class="viewcode-block" id="Attribute"><a class="viewcode-back" href="../../Attribute.html#free_properties.Attribute">[docs]</a><span class="k">class</span> <span class="nc">Attribute</span><span class="p">(</span><span class="n">FreeProperty</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an Attribute class that acts as a proxy for the value of an attribute.</span>
+<span class="sd">    </span>
+<span class="sd">    **Parameters**</span>
+<span class="sd">    </span>
+<span class="sd">        **obj:** object the attribute belongs to.</span>
+<span class="sd">        </span>
+<span class="sd">        **key:** attribute key.</span>
+<span class="sd">        </span>
+<span class="sd">    **Examples**</span>
+<span class="sd">    </span>
+<span class="sd">        First we need an object with attributes. So lets create a dummy class for this and initialize it:</span>
+<span class="sd">        </span>
+<span class="sd">        .. code-block:: python</span>
+<span class="sd">        </span>
+<span class="sd">            &gt;&gt;&gt; class Dummy:</span>
+<span class="sd">            ...    </span>
+<span class="sd">            ...     def __init__(self, value):</span>
+<span class="sd">            ...         self.value = value</span>
+<span class="sd">            ...     </span>
+<span class="sd">            ...     def __str__(self):</span>
+<span class="sd">            ...         return &#39;dummy&#39;</span>
+<span class="sd">            ...</span>
+<span class="sd">            &gt;&gt;&gt; dummy = Dummy(20)</span>
+<span class="sd">            </span>
+<span class="sd">        Create an Attribute object with the object and the key:</span>
+<span class="sd">            </span>
+<span class="sd">        .. code-block:: python</span>
+<span class="sd">    </span>
+<span class="sd">            &gt;&gt;&gt; v = Attribute(dummy, &#39;value&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; v</span>
+<span class="sd">            dummy.value -&gt; 20</span>
+<span class="sd">            </span>
+<span class="sd">        The attribute object acts as a proxy for getting and setting the value:</span>
+<span class="sd">        </span>
+<span class="sd">        .. code-block</span>
+<span class="sd">            </span>
+<span class="sd">            &gt;&gt;&gt; dummy.value = 0</span>
+<span class="sd">            &gt;&gt;&gt; v</span>
+<span class="sd">            dummy.value -&gt; 0</span>
+<span class="sd">            &gt;&gt;&gt; v += 40</span>
+<span class="sd">            &gt;&gt;&gt; dummy.value</span>
+<span class="sd">            40</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;obj&#39;</span><span class="p">,</span> <span class="s1">&#39;key&#39;</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+    
+    <span class="nd">@value</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.obj}</span><span class="s1">.</span><span class="si">{self.key}</span><span class="s1"> -&gt; </span><span class="si">{self.value}</span><span class="s1">&#39;</span></div>
+    
+
+<div class="viewcode-block" id="Item"><a class="viewcode-back" href="../../Item.html#free_properties.Item">[docs]</a><span class="k">class</span> <span class="nc">Item</span><span class="p">(</span><span class="n">FreeProperty</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create an Item class that acts as a proxy for the value of an item.</span>
+<span class="sd">    </span>
+<span class="sd">    **Parameters**</span>
+<span class="sd">    </span>
+<span class="sd">        **obj:** object the item belongs to.</span>
+<span class="sd">        </span>
+<span class="sd">        **key:** item key.</span>
+<span class="sd">        </span>
+<span class="sd">    **Examples**</span>
+<span class="sd">    </span>
+<span class="sd">        First we need an object with items. So let&#39;s create a dictionary with items:</span>
+<span class="sd">            </span>
+<span class="sd">        .. code-block:: python</span>
+<span class="sd">        </span>
+<span class="sd">            &gt;&gt;&gt; dummy = {&#39;value&#39;: 20}</span>
+<span class="sd">        </span>
+<span class="sd">        Create an Item object with the object and the key:</span>
+<span class="sd">            </span>
+<span class="sd">        .. code-block:: python</span>
+<span class="sd">    </span>
+<span class="sd">            &gt;&gt;&gt; v = Item(dummy, &#39;value&#39;)</span>
+<span class="sd">            &gt;&gt;&gt; v</span>
+<span class="sd">            {&#39;value&#39;: 20}[&#39;value&#39;] -&gt; 20</span>
+<span class="sd">            </span>
+<span class="sd">        The attribute object acts as a proxy for getting and setting the value:</span>
+<span class="sd">        </span>
+<span class="sd">        .. code-block</span>
+<span class="sd">            </span>
+<span class="sd">            &gt;&gt;&gt; dummy[&#39;value&#39;] = 0</span>
+<span class="sd">            &gt;&gt;&gt; v</span>
+<span class="sd">            {&#39;value&#39;: 20}[&#39;value&#39;] -&gt; 0</span>
+<span class="sd">            &gt;&gt;&gt; v += 40</span>
+<span class="sd">            &gt;&gt;&gt; {&#39;value&#39;: 20}[&#39;value&#39;]</span>
+<span class="sd">            40</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;obj&#39;</span><span class="p">,</span> <span class="s1">&#39;key&#39;</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+    
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+    
+    <span class="nd">@value</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="o">.</span><span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span> <span class="n">key</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&quot;&#39;</span><span class="si">{key}</span><span class="s2">&#39;&quot;</span>
+        <span class="k">return</span> <span class="n">f</span><span class="s1">&#39;</span><span class="si">{self.obj}</span><span class="s1">[</span><span class="si">{key}</span><span class="s1">] -&gt; </span><span class="si">{self.value}</span><span class="s1">&#39;</span></div>
+    
+    
+    
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">free_properties 2019 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yoel Cortes-Pena.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+    </div>
+  </body>
+</html>

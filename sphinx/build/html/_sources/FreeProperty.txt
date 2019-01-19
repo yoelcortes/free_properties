@@ -1,0 +1,7 @@
+FreeProperty
+============
+
+.. module:: free_properties
+
+.. autoclass:: FreeProperty
+   :members:

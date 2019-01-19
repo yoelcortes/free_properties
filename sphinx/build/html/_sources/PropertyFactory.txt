@@ -1,0 +1,7 @@
+PropertyFactory
+============
+
+.. module:: free_properties
+
+.. autoclass:: PropertyFactory
+   :members:
