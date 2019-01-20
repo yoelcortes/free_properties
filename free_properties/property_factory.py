@@ -6,7 +6,6 @@ Created on Fri Jan 18 14:18:27 2019
 """
 
 from .free_property import metaProperty, FreeProperty
-from bookkeep import Quantity
 
 __all__ = ('PropertyFactory',)
 
@@ -20,12 +19,6 @@ def search_units(doc):
         units = ''
     else:
         units = doc[par1+1:par2]
-    
-    # Validate units
-    try:
-        Quantity(0, units)
-    except:
-        units = search_units(doc[par2+1:])
     
     return units
 
@@ -46,7 +39,7 @@ def PropertyFactory(fget, fset=None, clsname=None, doc=None, units=None):
         
         **doc:** [str] Docstring of class. If None, the docstring of fget will be used.
         
-        **units:** [str] Units of measure. If None, the docstring will be searched and any valid units of measure in parenthesis will be used.
+        **units:** [str] Units of measure. If None, the docstring will be searched and units of measure in parenthesis will be used.
     
     **Examples**
     
