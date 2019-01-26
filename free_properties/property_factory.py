@@ -43,7 +43,7 @@ def PropertyFactory(fget, fset=None, clsname=None, doc=None, units=None):
     
     **Examples**
     
-        The PropertyFactory is an FreeProperty class creator that functions just like Python 'property' objects. Use the PropertyFactory to create a Weight class which calculates weight based on density and volume:
+        The PropertyFactory is a FreeProperty class creator that functions similar to Python 'property' objects. Use the PropertyFactory to create a Weight class which calculates weight based on density and volume:
         
         .. code-block:: python
             

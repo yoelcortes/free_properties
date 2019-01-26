@@ -37,9 +37,9 @@ To get the git version, run:
 Documentation
 -------------
 
-array_collections's documentation is available on the web:
+free_properties's documentation is available on the web:
 
-    http://array_collections.readthedocs.io/
+    http://free_properties.readthedocs.io/
 
 Getting started
 ---------------
