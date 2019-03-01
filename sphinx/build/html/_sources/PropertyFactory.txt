@@ -1,5 +1,5 @@
 PropertyFactory
-============
+===============
 
 .. module:: free_properties
 

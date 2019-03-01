@@ -9,7 +9,7 @@
     <title>PropertyFactory &#8212; free_properties 2019 documentation</title>
     <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
@@ -72,9 +72,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="propertyfactory">
-<h1>PropertyFactory<a class="headerlink" href="#propertyfactory" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="module-free_properties"></span><dl class="class">
+  <div class="section" id="module-free_properties">
+<span id="propertyfactory"></span><h1>PropertyFactory<a class="headerlink" href="#module-free_properties" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
 <dt id="free_properties.PropertyFactory">
 <em class="property">class </em><code class="descclassname">free_properties.</code><code class="descname">PropertyFactory</code><a class="reference internal" href="_modules/free_properties/property_factory.html#PropertyFactory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#free_properties.PropertyFactory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create an FreeProperty subclass with getter and setter functions.</p>
@@ -84,11 +84,11 @@
 <p><strong>fset:</strong> [function] Should set the value of instances.</p>
 <p><strong>clsname:</strong> [str] Name of the class. If None, the function name of fget will be used</p>
 <p><strong>doc:</strong> [str] Docstring of class. If None, the docstring of fget will be used.</p>
-<p><strong>units:</strong> [str] Units of measure. If None, the docstring will be searched and any valid units of measure in parenthesis will be used.</p>
+<p><strong>units:</strong> [str] Units of measure. If None, the docstring will be searched and units of measure in parenthesis will be used.</p>
 </div></blockquote>
 <p><strong>Examples</strong></p>
 <blockquote>
-<div><p>The PropertyFactory is an FreeProperty class creator that functions just like Python ‘property’ objects. Use the PropertyFactory to create a Weight class which calculates weight based on density and volume:</p>
+<div><p>The PropertyFactory is a FreeProperty class creator that functions similar to Python ‘property’ objects. Use the PropertyFactory to create a Weight class which calculates weight based on density and volume:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">getter</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="gp">... </span>   <span class="sd">&#39;&#39;&#39;Weight (kg) based on volume (m^3).&#39;&#39;&#39;</span>
 <span class="gp">... </span>   <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
@@ -152,7 +152,7 @@
 </pre></div>
 </div>
 <p>In place magic methods will also change the property value:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">weight_water</span><span class="o">.</span><span class="n">value</span> <span class="o">-=</span> <span class="mi">1000</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">weight_water</span> <span class="o">-=</span> <span class="mi">1000</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">weight_water</span>
 <span class="go">Weight(Water) -&gt; 3000 (kg)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">water_data</span>  <span class="c1"># The change also affects the original data</span>
@@ -190,7 +190,7 @@
     </div>
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, Yoel Cortes-Pena.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.9.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.7.4.
     </div>
   </body>
 </html>
