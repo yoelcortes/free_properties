@@ -91,7 +91,7 @@ def PropertyFactory(fget, fset=None, clsname=None, doc=None, units=None):
            >>> weight_ethanol = Weight('Ethanol', ethanol_data)
            >>> weight_water
            Weight(Water) -> 3000 (kg)
-           >>>weight_ethanol
+           >>> weight_ethanol
            Weight(Ethanol) -> 2367 (kg)
         
         These properties behave just like their dynamic value:

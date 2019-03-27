@@ -12,12 +12,6 @@ __all__ = ('FreeProperty',)
 def dim(string):
     """Return string with gray ansicolor coding."""
     return '\x1b[37m\x1b[22m' + string + '\x1b[0m'
-
-def get_value(arg):
-    if isinstance(arg, FreeProperty):
-        return arg.value
-    else:
-        return arg
     
 
 # %% Metaclasses
@@ -73,21 +67,21 @@ class propConstructor(type):
     """Constructor for the FreeProperty class. This constructor creates class instances of metaProperty, not propConstructor."""
     @staticmethod
     def __wrap(name):
+        check = isinstance
         def proxy_method(self, *args, **kwargs):
-            value = self.value
-            method = getattr(value, name)
-            args = tuple(get_value(i) for i in args)
-            return method(*args, **kwargs)
+            method = getattr(self.value, name)
+            return method(*(i.value if check(i, FreeProperty) else i for i in args),
+                          **kwargs)
         return proxy_method
     
     @staticmethod
     def __iwrap(iname):
         name = iname[:2] + iname[3:] # Remove 'i'
+        check = isinstance
         def proxy_method(self, *args, **kwargs):
-            value = self.value
-            method = getattr(value, name)
-            args = tuple(get_value(i) for i in args)
-            self.value = method(*args, **kwargs)
+            method = getattr(self.value, name)
+            self.value = method(*(i.value if check(i, FreeProperty) else i for i in args),
+                                **kwargs)
             return self
         return proxy_method
     
