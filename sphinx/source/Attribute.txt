@@ -1,7 +1,0 @@
-Attribute
-==========
-
-.. module:: free_properties
-
-.. autoclass:: Attribute
-   :members:

@@ -1,7 +1,0 @@
-Item
-====
-
-.. module:: free_properties
-
-.. autoclass:: Item
-   :members:

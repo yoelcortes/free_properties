@@ -11,8 +11,6 @@ free_properties: Manage properties outside a class
    
    PropertyFactory
    FreeProperty
-   Attribute
-   Item
 
 
 Indices and tables
