@@ -7,13 +7,6 @@ Created on Fri Jan 18 14:19:03 2019
 
 __all__ = ('FreeProperty',)
 
-# %% Functions
-
-def dim(string):
-    """Return string with gray ansicolor coding."""
-    return '\x1b[37m\x1b[22m' + string + '\x1b[0m'
-    
-
 # %% Metaclasses
 
 # Do not include: '__new__', '__init__', '__del__', '__bytes__', '__repr__',
@@ -68,20 +61,18 @@ class propConstructor(type):
     @staticmethod
     def __wrap(name):
         check = isinstance
+        attr = getattr
         def proxy_method(self, *args, **kwargs):
-            method = getattr(self.value, name)
-            return method(*(i.value if check(i, FreeProperty) else i for i in args),
-                          **kwargs)
+            return attr(self.value, name)(*(i.value if check(i, FreeProperty) else i for i in args), **kwargs)
         return proxy_method
     
     @staticmethod
     def __iwrap(iname):
         name = iname[:2] + iname[3:] # Remove 'i'
         check = isinstance
+        attr = getattr
         def proxy_method(self, *args, **kwargs):
-            method = getattr(self.value, name)
-            self.value = method(*(i.value if check(i, FreeProperty) else i for i in args),
-                                **kwargs)
+            self.value = attr(self.value, name)(*(i.value if check(i, FreeProperty) else i for i in args), **kwargs)
             return self
         return proxy_method
     
@@ -106,7 +97,6 @@ class propConstructor(type):
 class FreeProperty(metaclass=propConstructor):
     """Abstract Property class. Child classes must include a 'value' property."""
     __slots__ = ('name', 'data')
-    
     _units = ''
     
     def __init__(self, name, data):
@@ -118,8 +108,8 @@ class FreeProperty(metaclass=propConstructor):
     
     def __repr__(self):
         units = self._units
-        if units: units = dim(f' ({units})')
-        return f'{type(self).__name__}({self.name}) -> {self.value}{units}'
+        if units: units = f' {units}'
+        return f'{type(self).__name__}({self.name}): {self.value}{units}'
     
     
     

@@ -4,12 +4,11 @@ Created on Fri Jan 18 14:18:27 2019
 
 @author: Guest Group
 """
-
-from .free_property import metaProperty, FreeProperty
+from ._free_property import metaProperty, FreeProperty
 
 __all__ = ('PropertyFactory',)
 
-# %% Functions
+# %% utils
 
 def search_units(doc):
     # Find units
@@ -19,7 +18,6 @@ def search_units(doc):
         units = ''
     else:
         units = doc[par1+1:par2]
-    
     return units
 
 
@@ -90,9 +88,13 @@ def PropertyFactory(fget, fset=None, clsname=None, doc=None, units=None):
            >>> weight_water = Weight('Water', water_data)
            >>> weight_ethanol = Weight('Ethanol', ethanol_data)
            >>> weight_water
-           Weight(Water) -> 3000 (kg)
+           Weight(Water): 3000 kg
            >>> weight_ethanol
-           Weight(Ethanol) -> 2367 (kg)
+           Weight(Ethanol): 2367 kg
+        
+        .. Note::
+            
+           The units are taken from the the function docstring. The first word in parentesis denotes the units.
         
         These properties behave just like their dynamic value:
         
@@ -123,7 +125,7 @@ def PropertyFactory(fget, fset=None, clsname=None, doc=None, units=None):
         
             >>> weight_water -= 1000
             >>> weight_water
-            Weight(Water) -> 3000 (kg)
+            Weight(Water): 3000 kg
             >>> water_data  # The change also affects the original data
             {'rho': 1000, 'vol': 3}
             
@@ -132,10 +134,8 @@ def PropertyFactory(fget, fset=None, clsname=None, doc=None, units=None):
     if clsname is None: clsname = fget.__name__
     if doc     is None: doc     = fget.__doc__
     if units   is None: units   = search_units(doc)
-    
     definitions = {'__doc__': doc,
-                   '__slots__': ('name', 'data'),
+                   '__slots__': (),
                    '_units': units,
-                   'value': property(fget, fset)}    
-    
+                   'value': property(fget, fset)}        
     return metaProperty(clsname, (FreeProperty,), definitions)
