@@ -1,2 +1,0 @@
-make_html.bat
-open_docs.bat
