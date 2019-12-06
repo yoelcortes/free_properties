@@ -91,9 +91,9 @@ Create dictionaries of data and initialize new Weight objects:
    >>> weight_water = Weight('Water', water_data)
    >>> weight_ethanol = Weight('Ethanol', ethanol_data)
    >>> weight_water
-   Weight(Water) -> 3000 (kg)
-   >>>weight_ethanol
-   Weight(Ethanol) -> 2367 (kg)
+   <Weight(Water): 3000 kg>
+   >>> weight_ethanol
+   <Weight(Ethanol): 2367 kg>
 
 These properties behave just like their dynamic value:
 
@@ -103,8 +103,6 @@ These properties behave just like their dynamic value:
     3030
     >>> weight_water + weight_ethanol
     5367
-    >>> weight_water.bit_length() # A method of the dynamic value
-    12
     
 Get and set the value through the 'value' attribute:
     
@@ -124,9 +122,44 @@ In place magic methods will also change the property value:
 
     >>> weight_water -= 1000
     >>> weight_water
-    Weight(Water) -> 3000 (kg)
+    <Weight(Water): 3000 kg>
     >>> water_data  # The change also affects the original data
     {'rho': 1000, 'vol': 3}
+    
+It may also be convinient to use the property_array to manager arrays of free_properties. Create a property_array from data:
+           
+.. code-block:: python
+   
+   >>> prop_arr = property_array([weight_water, weight_ethanol])
+   >>> prop_arr
+   property_array([<Water: 3000 kg>, <Ethanol: 2367 kg>], dtype=object)
+   
+Changing the values of a property_array changes the value of its properties:
+   
+.. code-block:: python
+   
+   >>> # Addition in place
+   >>> prop_arr += 3000
+   >>> prop_arr
+   property_array([<Water: 6000 kg>, <Ethanol: 5367 kg>], dtype=object)
+   >>> # Note how the data also changes
+   >>> water_data
+   {'rho': 1000, 'vol': 6.0}
+   >>> ethanol_data
+   {'rho': 789, 'vol': 6.802281368821292}
+   >>> # Setting an item changes the property value
+   >>> prop_arr[1] = 2367
+   >>> ethanol_data
+   {'rho': 789, 'vol': 3}
+  
+New arrays have no connection to the property_array:
+   
+.. code-block:: python
+   
+   >>> prop_arr - 1000 #  Returns a new array
+   array([5000.0, 1367.0], dtype=object)
+   >>> water_data #  Data remains unchanged
+   {'rho': 1000, 'vol': 6.0}
 
 Latest source code
 ------------------
