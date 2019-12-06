@@ -126,7 +126,7 @@ In place magic methods will also change the property value:
     >>> water_data  # The change also affects the original data
     {'rho': 1000, 'vol': 3}
     
-It may also be convinient to use the property_array to manager arrays of free_properties. Create a property_array from data:
+Use the property_array to manage free_properties as an array:
            
 .. code-block:: python
    
