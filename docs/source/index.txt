@@ -11,6 +11,7 @@ free_properties: Manage properties outside a class
    
    PropertyFactory
    FreeProperty
+   property_array
 
 
 Indices and tables

@@ -2,6 +2,7 @@ README.rst
 setup.py
 free_properties/__init__.py
 free_properties/_free_property.py
+free_properties/_property_array.py
 free_properties/_property_factory.py
 free_properties.egg-info/PKG-INFO
 free_properties.egg-info/SOURCES.txt

@@ -1,0 +1,7 @@
+property_array
+==============
+
+.. module:: free_properties
+
+.. autoclass:: property_array
+   :members:
