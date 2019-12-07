@@ -46,6 +46,9 @@ def PropertyFactory(fget=None, fset=None, clsname=None, doc=None, units=None,
         units : str
             Units of measure. If None, the docstring will be searched and units of measure in parenthesis will be used.
     
+        slots : tuple[str]
+            Slots for class.
+    
     Examples
     --------
     

@@ -149,6 +149,7 @@ def PropertyFactory(fget=None, fset=None, clsname=None, doc=None, units=None,
     
     definitions = {'__doc__': doc,
                    '__slots__': slots or ('name', 'data'),
+                   '__module__': fget.__module__,
                    '_units': units,
                    'value': property(fget, fset)}        
     return metaProperty(clsname, (FreeProperty,), definitions)

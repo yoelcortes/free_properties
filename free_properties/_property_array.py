@@ -9,7 +9,6 @@ import numpy as np
 __all__ = ('property_array',)
 
 ndarray = np.ndarray
-broadcast = np.broadcast_to
 isa = isinstance
 
 # %% Property array
