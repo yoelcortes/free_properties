@@ -100,6 +100,9 @@ class property_array(ndarray):
     def __new__(cls, properties, order='C'):
         return np.asarray(properties, object, order).view(cls)
     
+    def values(self):
+        return np.array(self, float)
+    
     def __setitem__(self, key, value):
         items = self[key]
         if isa(items, ndarray):
