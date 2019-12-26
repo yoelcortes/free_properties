@@ -68,9 +68,10 @@ class FreeProperty(metaclass=metaProperty):
     __slots__ = ()
     _units = ''
     
-    def __init__(self, *slots):
-        set = setattr
-        for i, j in zip(self.__slots__, slots): set(self, i, j)
+    def __init__(self, *args, **kwargs):
+        setfield = setattr
+        for i, j in zip(self.__slots__, args): setfield(self, i, j)
+        for i, j in kwargs.items(): setfield(self, i, j)
     
     def __call__(self, *args, **kwargs):
         return self.value(*args, **kwargs)

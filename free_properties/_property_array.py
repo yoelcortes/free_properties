@@ -18,11 +18,7 @@ class property_array(ndarray):
     
     Parameters
     ----------
-        array : array_like[FreeProperty]
-            Input data, in any form that can be converted to an array. This includes lists, lists of tuples, tuples, tuples of tuples, tuples of lists and ndarrays.
-    
-        order : {'C', 'F'}
-            Whether to use row-major (C-style) or column-major (Fortran-style) memory representation. Defaults to ‘C’.
+        properties : array_like[FreeProperty]
     
     Examples
     --------
@@ -65,7 +61,7 @@ class property_array(ndarray):
        
            >>> prop_arr = property_array([weight_water, weight_ethanol])
            >>> prop_arr
-           property_array([<Water: 3000 kg>, <Ethanol: 2367 kg>], dtype=object)
+           property_array([<Water: 3000 kg>, <Ethanol: 2367 kg>])
            
         Changing the values of a property_array changes the value of its properties:
            
@@ -74,7 +70,7 @@ class property_array(ndarray):
            >>> # Addition in place
            >>> prop_arr += 3000
            >>> prop_arr
-           property_array([<Water: 6000 kg>, <Ethanol: 5367 kg>], dtype=object)
+           property_array([<Water: 6000 kg>, <Ethanol: 5367 kg>])
            >>> # Note how the data also changes
            >>> water_data
            {'rho': 1000, 'vol': 6.0}
@@ -90,19 +86,92 @@ class property_array(ndarray):
         .. code-block:: python
        
            >>> prop_arr - 1000 #  Returns a new array
-           array([5000.0, 1367.0], dtype=object)
+           array([5000.0, 1367.0])
            >>> water_data #  Data remains unchanged
            {'rho': 1000, 'vol': 6.0}
     
     """
-    __slots__ = ()          
-    
-    def __new__(cls, properties, order='C'):
-        return np.asarray(properties, object, order).view(cls)
+    def __new__(cls, properties):
+        return np.asarray(properties, dtype=object).view(cls)
     
     @property
     def value(self):
         return np.array(self, float)
+    
+    def all(self, *args, **kwargs):
+        return self.value.all(*args, **kwargs)
+    
+    def any(self, *args, **kwargs):
+        return self.value.any(*args, **kwargs)
+    
+    def argmax(self, *args, **kwargs):
+        return self.value.argmax(*args, **kwargs)
+    
+    def argmin(self, *args, **kwargs):
+        return self.value.argmin(*args, **kwargs)
+    
+    def argpartition(self, *args, **kwargs):
+        return self.value.argpartition(*args, **kwargs)
+    
+    def argsort(self, *args, **kwargs):
+        return self.value.argsort(*args, **kwargs)
+    
+    def choose(self, *args, **kwargs):
+        return self.value.choose(*args, **kwargs)
+    
+    def clip(self, *args, **kwargs):
+        return self.value.clip(*args, **kwargs)
+    
+    def conj(self):
+        return self.values.conj()
+    
+    def conjugate(self):
+        return self.values.conjugate()
+    
+    def cumprod(self, *args, **kwargs):
+        return self.value.cumprod(*args, **kwargs)
+    
+    def cumsum(self, *args, **kwargs):
+        return self.value.cumsum(*args, **kwargs)
+    
+    def dot(self, *args, **kwargs):
+        return self.value.dot(*args, **kwargs)
+    
+    def max(self, *args, **kwargs):
+        return self.value.max(*args, **kwargs)
+    
+    def mean(self, *args, **kwargs):
+        return self.value.mean(*args, **kwargs)
+    
+    def min(self, *args, **kwargs):
+        return self.value.min(*args, **kwargs)
+    
+    def nonzero(self, *args, **kwargs):
+        return self.value.getfield(*args, **kwargs)
+    
+    def prod(self, *args, **kwargs):
+        return self.value.prod(*args, **kwargs)
+    
+    def ptp(self, *args, **kwargs):
+        return self.value.ptp(*args, **kwargs)
+    
+    def put(self, *args, **kwargs):
+        return self.value.put(*args, **kwargs)
+    
+    def round(self, *args, **kwargs):
+        return self.value.round(*args, **kwargs)
+    
+    def std(self, *args, **kwargs):
+        return self.value.std(*args, **kwargs)
+    
+    def sum(self, *args, **kwargs):
+        return self.value.sum(*args, **kwargs)
+    
+    def trace(self, *args, **kwargs):
+        return self.value.trace(*args, **kwargs)
+    
+    def var(self, *args, **kwargs):
+        return self.value.var(*args, **kwargs)
     
     def __setitem__(self, key, value):
         items = self[key]
@@ -112,58 +181,134 @@ class property_array(ndarray):
         else:
             items.value = value
     
-    def __array_wrap__(self, result):
-        if self is result: return self
-        else: return result.view(ndarray)
+    def __add__(self, other):
+        return self.value + other
+    
+    def __sub__(self, other):
+        return self.value - other
+    
+    def __mul__(self, other):
+        return self.value * other
+    
+    def __matmul__(self, other):
+        return self.value @ other
+    
+    def __truediv__(self, other):
+        return self.value / other
+    
+    def __floordiv__(self, other):
+        return self.value // other
+    
+    def __mod__(self, other):
+        return self.value % other
+    
+    def __pow__(self, other):
+        return self.value ** other
+    
+    def __lshift__(self, other):
+        return self.value << other
+    
+    def __rshift__(self, other):
+        return self.value >> other
+    
+    def __and__(self, other): 
+        return self.value & other
+    
+    def __xor__(self, other): 
+        return self.value ^ other
+    
+    def __or__(self, other):
+        return self.value | other
+    
+    def __radd__(self, other):
+        return other + self.value
+    
+    def __rsub__(self, other):
+        return other - self.value
+    
+    def __rmul__(self, other):
+        return other * self.value
+    
+    def __rmatmul__(self, other):
+        return other @ self.value
+    
+    def __rtruediv__(self, other):
+        return other / self.value
+    
+    def __rfloordiv__(self, other):
+        return other // self.value
+    
+    def __rmod__(self, other):
+        return other % self.value
+    
+    def __rpow__(self, other):
+        return other ** self.value
+    
+    def __rlshift__(self, other):
+        return other << self.value 
+    
+    def __rrshift__(self, other):
+        return other >> self.value
+    
+    def __rand__(self, other):
+        return other & self.value
+    
+    def __rxor__(self, other):
+        return other ^ self.value
+    
+    def __ror__(self, other):
+        return other | self.value
     
     def __iadd__(self, other):
-        self[:] = ndarray.__add__(self, other)
+        self[:] = self.value + other
         return self
     
     def __isub__(self, other): 
-        self[:] = ndarray.__sub__(self, other)
+        self[:] = self.value - other
         return self
     
     def __imul__(self, other): 
-        self[:] = ndarray.__mul__(self, other)
+        self[:] = self.value * other
         return self
     
     def __imatmul__(self, other):
         raise TypeError("in-place matrix multiplication is not (yet) supported")
     
     def __itruediv__(self, other): 
-        self[:] = ndarray.__truediv__(self, other)
+        self[:] = self.value / other
         return self
     
     def __ifloordiv__(self, other):
-        self[:] = ndarray.__floordiv__(self, other)
+        self[:] = self.value // other
         return self
     
     def __imod__(self, other): 
-        self[:] = ndarray.__mod__(self, other)
+        self[:] =self.value % other
         return self
     
     def __ipow__(self, other): 
-        self[:] = ndarray.__pow__(self, other)
+        self[:] = self.value ** other
         return self
     
     def __ilshift__(self, other):
-        self[:] = ndarray.__lshift__(self, other)
+        self[:] = self.value << other
         return self
     
     def __irshift__(self, other):
-        self[:] = ndarray.__rshift__(self, other)
+        self[:] = self.value >> other
         return self
     
     def __iand__(self, other): 
-        self[:] = ndarray.__and__(self, other)
+        self[:] = self & other
         return self
     
     def __ixor__(self, other): 
-        self[:] = ndarray.__xor__(self, other)
+        self[:] = self.value ^ other
         return self
     
     def __ior__(self, other):
-        self[:] = ndarray.__or__(self, other)
+        self[:] = self.value | other
         return self
 
+    def __repr__(self):
+        return super().__repr__().replace(', dtype=object', '').replace('array', 'property_array').replace('\n', '\n' + 9*' ')
