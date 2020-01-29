@@ -311,4 +311,4 @@ class property_array(ndarray):
         return self
 
     def __repr__(self):
-        return super().__repr__().replace(', dtype=object', '').replace('array', 'property_array').replace('\n', '\n' + 9*' ')
+        return super().__repr__().replace('dtype=object)', '').rstrip("\n, ") + ')'
