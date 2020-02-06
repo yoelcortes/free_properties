@@ -319,14 +319,4 @@ class FreeProperty(metaclass=metaProperty):
         except: pass
         return f'<{self.name}: {value}{units}>'
     
-    def show(self):
-        units = self._units
-        if units: units = f' {units}'
-        value = self.value
-        try: value = format(value, '.5g')
-        except: pass
-        print(f'<{type(self).__name__}({self.name}): {value}{units}>')
-    
-    _ipython_display_ = show
-    
     

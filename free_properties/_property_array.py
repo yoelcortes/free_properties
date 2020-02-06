@@ -22,74 +22,74 @@ class property_array(ndarray):
     
     Examples
     --------
-        Use the PropertyFactory to create a Weight property class which calculates weight based on density and volume:
+    Use the PropertyFactory to create a Weight property class which calculates weight based on density and volume:
+
+    .. code-block:: python
     
-        .. code-block:: python
-        
-            >>> from free_property import PropertyFactory, property_array
-            >>>
-            >>> @PropertyFactory
-            >>> def Weight(self):
-            ...    '''Weight (kg) based on volume (m^3).'''
-            ...    data = self.data
-            ...    rho = data['rho'] # Density (kg/m^3)
-            ...    vol = data['vol'] # Volume (m^3)
-            ...    return rho * vol
-            >>>
-            >>> @Weight.setter
-            >>> def Weight(self, weight):
-            ...    data = self.data
-            ...    rho = data['rho'] # Density (kg/m^3)
-            ...    data['vol'] = weight / rho
-           
-        Create dictionaries of data and initialize new properties:
+        >>> from free_property import PropertyFactory, property_array
+        >>>
+        >>> @PropertyFactory
+        >>> def Weight(self):
+        ...    '''Weight (kg) based on volume (m^3).'''
+        ...    data = self.data
+        ...    rho = data['rho'] # Density (kg/m^3)
+        ...    vol = data['vol'] # Volume (m^3)
+        ...    return rho * vol
+        >>>
+        >>> @Weight.setter
+        >>> def Weight(self, weight):
+        ...    data = self.data
+        ...    rho = data['rho'] # Density (kg/m^3)
+        ...    data['vol'] = weight / rho
        
-        .. code-block:: python
+    Create dictionaries of data and initialize new properties:
+   
+    .. code-block:: python
+   
+       >>> water_data = {'rho': 1000, 'vol': 3}
+       >>> ethanol_data = {'rho': 789, 'vol': 3}
+       >>> weight_water = Weight('Water', water_data)
+       >>> weight_ethanol = Weight('Ethanol', ethanol_data)
+       >>> weight_water
+       <Weight(Water): 3000 kg>
+       >>> weight_ethanol
+       <Weight(Ethanol): 2367 kg>
+      
+    Create a property_array from data:
        
-           >>> water_data = {'rho': 1000, 'vol': 3}
-           >>> ethanol_data = {'rho': 789, 'vol': 3}
-           >>> weight_water = Weight('Water', water_data)
-           >>> weight_ethanol = Weight('Ethanol', ethanol_data)
-           >>> weight_water
-           <Weight(Water): 3000 kg>
-           >>> weight_ethanol
-           <Weight(Ethanol): 2367 kg>
-          
-        Create a property_array from data:
-           
-        .. code-block:: python
+    .. code-block:: python
+   
+       >>> prop_arr = property_array([weight_water, weight_ethanol])
+       >>> prop_arr
+       property_array([<Water: 3000 kg>, <Ethanol: 2367 kg>])
        
-           >>> prop_arr = property_array([weight_water, weight_ethanol])
-           >>> prop_arr
-           property_array([<Water: 3000 kg>, <Ethanol: 2367 kg>])
-           
-        Changing the values of a property_array changes the value of its properties:
-           
-        .. code-block:: python
+    Changing the values of a property_array changes the value of its properties:
        
-           >>> # Addition in place
-           >>> prop_arr += 3000
-           >>> prop_arr
-           property_array([<Water: 6000 kg>, <Ethanol: 5367 kg>])
-           >>> # Note how the data also changes
-           >>> water_data
-           {'rho': 1000, 'vol': 6.0}
-           >>> ethanol_data
-           {'rho': 789, 'vol': 6.802281368821292}
-           >>> # Setting an item changes the property value
-           >>> prop_arr[1] = 2367
-           >>> ethanol_data
-           {'rho': 789, 'vol': 3}
-          
-        New arrays have no connection to the property_array:
-           
-        .. code-block:: python
+    .. code-block:: python
+   
+       >>> # Addition in place
+       >>> prop_arr += 3000
+       >>> prop_arr
+       property_array([<Water: 6000 kg>, <Ethanol: 5367 kg>])
+       >>> # Note how the data also changes
+       >>> water_data
+       {'rho': 1000, 'vol': 6.0}
+       >>> ethanol_data
+       {'rho': 789, 'vol': 6.802281368821292}
+       >>> # Setting an item changes the property value
+       >>> prop_arr[1] = 2367
+       >>> ethanol_data
+       {'rho': 789, 'vol': 3}
+      
+    New arrays have no connection to the property_array:
        
-           >>> prop_arr - 1000 #  Returns a new array
-           array([5000.0, 1367.0])
-           >>> water_data #  Data remains unchanged
-           {'rho': 1000, 'vol': 6.0}
-    
+    .. code-block:: python
+   
+       >>> prop_arr - 1000 #  Returns a new array
+       array([5000.0, 1367.0])
+       >>> water_data #  Data remains unchanged
+       {'rho': 1000, 'vol': 6.0}
+
     """
     def __new__(cls, properties):
         return np.asarray(properties, dtype=object).view(cls)
