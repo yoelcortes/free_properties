@@ -147,7 +147,7 @@ class property_array(ndarray):
         return self.value.min(*args, **kwargs)
     
     def nonzero(self, *args, **kwargs):
-        return self.value.getfield(*args, **kwargs)
+        return self.value.nonzero(*args, **kwargs)
     
     def prod(self, *args, **kwargs):
         return self.value.prod(*args, **kwargs)
