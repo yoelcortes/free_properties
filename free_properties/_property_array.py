@@ -14,7 +14,10 @@ isa = isinstance
 # %% Property array
 
 class property_array(ndarray):
-    """Create an array that allows for array-like manipulation of FreeProperty objects. All entries in a property_array must be instances of FreeProperty. Setting items of a property_array sets values of objects instead.
+    """
+    Create an array that allows for array-like manipulation of FreeProperty 
+    objects. All entries in a property_array must be instances of FreeProperty.
+    Setting items of a property_array sets values of objects instead.
     
     Parameters
     ----------
@@ -22,7 +25,8 @@ class property_array(ndarray):
     
     Examples
     --------
-    Use the PropertyFactory to create a Weight property class which calculates weight based on density and volume:
+    Use the PropertyFactory to create a Weight property class which calculates
+    weight based on density and volume:
 
     .. code-block:: python
     

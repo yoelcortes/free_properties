@@ -1,0 +1,5 @@
+build
+dist
+free_properties.egg-info
+**/__pycache__
+docs/build/*
