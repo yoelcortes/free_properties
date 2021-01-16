@@ -11,7 +11,7 @@ setup(
       name = 'free_properties',
       packages = ['free_properties'],
       license='MIT',
-      version = '0.2.5',
+      version = '0.2.6',
       description = 'Manage properties outside a class',
       long_description=open('README.rst').read(),
       author = 'Yoel Cortes-Pena',

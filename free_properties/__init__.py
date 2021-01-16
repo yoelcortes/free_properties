@@ -10,3 +10,5 @@ __all__ = ('FreeProperty' , 'PropertyFactory', 'property_array')
 from ._free_property import FreeProperty
 from ._property_factory import PropertyFactory
 from ._property_array import property_array
+
+__version__ = '0.2.6'

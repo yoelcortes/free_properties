@@ -180,7 +180,7 @@ class property_array(ndarray):
     def __setitem__(self, key, value):
         items = self[key]
         if isa(items, ndarray):
-            for i, v in np.nditer((items, value), flags=('refs_ok',)):
+            for i, v in np.nditer((items, value), flags=('refs_ok', 'zerosize_ok')):
                 i.item().value = v 
         else:
             items.value = value
