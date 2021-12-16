@@ -1,3 +1,4 @@
+LICENSE.txt
 README.rst
 setup.py
 free_properties/__init__.py

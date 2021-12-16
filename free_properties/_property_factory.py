@@ -8,19 +8,6 @@ from ._free_property import metaProperty, FreeProperty
 
 __all__ = ('PropertyFactory',)
 
-# %% utils
-
-def search_units(doc):
-    # Find units
-    par1 = doc.find('(')
-    par2 = doc.find(')')
-    if par1==-1 or par2==-1:
-        units = ''
-    else:
-        units = doc[par1+1:par2]
-    return units
-
-
 # %% Property Factory
 
 
@@ -30,24 +17,24 @@ def PropertyFactory(fget=None, fset=None, clsname=None, doc=None, units=None,
     
     Parameters
     ----------
+    fget : function, optional
+        Should return value of instances. If not given, a decorator expecting
+        fget will be returned.
     
-        fget : function
-            Should return value of instances.
-        
-        fset : function
-            Should set the value of instances.
-        
-        clsname : str
-            Name of the class. If None, the function name of fget will be used
-        
-        doc : str
-            Docstring of class. If None, the docstring of fget will be used.
-        
-        units : str
-            Units of measure. If None, the docstring will be searched and units of measure in parenthesis will be used.
+    fset : function, optional
+        Should set the value of instances.
     
-        slots : tuple[str]
-            Slots for class.
+    clsname : str, optional
+        Name of the class. Defaults to the function name of fget.
+    
+    doc : str, optional
+        Docstring of class. Defaults to the docstring of fget.
+    
+    units : str, optional
+        Units of measure.
+
+    slots : tuple[str], optional
+        Slots for class.
     
     Examples
     --------
@@ -56,6 +43,7 @@ def PropertyFactory(fget=None, fset=None, clsname=None, doc=None, units=None,
     
     .. code-block:: python
         
+        >>> from free_properties import PropertyFactory
         >>> def getter(self):
         ...    '''Weight (kg) based on volume (m^3).'''
         ...    data = self.data
@@ -69,13 +57,13 @@ def PropertyFactory(fget=None, fset=None, clsname=None, doc=None, units=None,
         ...    data['vol'] = weight / rho
         >>>
         >>> # Initialize with a value getter, setter, and the class name.
-        >>> Weight = PropertyFactory(getter, setter, 'Weight')
+        >>> Weight = PropertyFactory(fget=getter, fset=setter, clsname='Weight', units='kg')
         
     It is more convinient to use the PropertyFactory as a decorator:
     
     .. code-block:: python
        
-        >>> @PropertyFactory
+        >>> @PropertyFactory(units='kg')
         >>> def Weight(self):
         ...    '''Weight (kg) based on volume (m^3).'''
         ...    data = self.data
@@ -99,9 +87,9 @@ def PropertyFactory(fget=None, fset=None, clsname=None, doc=None, units=None,
        >>> weight_water = Weight('Water', water_data)
        >>> weight_ethanol = Weight('Ethanol', ethanol_data)
        >>> weight_water
-       Weight(Water): 3000 kg
+       <Water: 3000 kg>
        >>> weight_ethanol
-       Weight(Ethanol): 2367 kg
+       <Ethanol: 2367 kg>
     
     .. Note::
         
@@ -124,9 +112,9 @@ def PropertyFactory(fget=None, fset=None, clsname=None, doc=None, units=None,
         3000
         >>> weight_water.value = 4000 
         >>> weight_water.value
-        4000
+        4000.0
         >>> water_data # Note that the volume changed too
-        {'rho': 1000, 'vol': 4}
+        {'rho': 1000, 'vol': 4.0}
 
     In place magic methods will also change the property value:
     
@@ -134,9 +122,9 @@ def PropertyFactory(fget=None, fset=None, clsname=None, doc=None, units=None,
     
         >>> weight_water -= 1000
         >>> weight_water
-        Weight(Water): 3000 kg
+        <Water: 3000 kg>
         >>> water_data  # The change also affects the original data
-        {'rho': 1000, 'vol': 3}
+        {'rho': 1000, 'vol': 3.0}
             
     """       
     if not fget:
@@ -145,7 +133,6 @@ def PropertyFactory(fget=None, fset=None, clsname=None, doc=None, units=None,
     # Defaults
     if clsname is None: clsname = fget.__name__
     if doc     is None: doc     = fget.__doc__
-    if units   is None: units   = search_units(doc)
     
     definitions = {'__doc__': doc,
                    '__slots__': slots or ('name', 'data'),

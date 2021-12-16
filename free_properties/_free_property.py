@@ -313,7 +313,7 @@ class FreeProperty(metaclass=metaProperty):
     
     def __repr__(self):
         units = self._units
-        if units: units = f' {units}'
+        units = f' {units}' if units else ''
         value = self.value
         try: value = format(value, '.5g')
         except: pass

@@ -44,10 +44,11 @@ free_properties's documentation is available on the web:
 Getting started
 ---------------
 
-The PropertyFactory is an FreeProperty class creator that functions similar to Python 'property' objects. Use the PropertyFactory to create a Weight class which calculates weight based on density and volume:
+The PropertyFactory is a FreeProperty class creator that functions similar to Python 'property' objects. Use the PropertyFactory to create a Weight class which calculates weight based on density and volume:
     
 .. code-block:: python
     
+    >>> from free_properties import PropertyFactory
     >>> def getter(self):
     ...    '''Weight (kg) based on volume (m^3).'''
     ...    data = self.data
@@ -61,13 +62,13 @@ The PropertyFactory is an FreeProperty class creator that functions similar to P
     ...    data['vol'] = weight / rho
     >>>
     >>> # Initialize with a value getter, setter, and the class name.
-    >>> Weight = PropertyFactory(getter, setter, 'Weight')
+    >>> Weight = PropertyFactory(getter, setter, 'Weight', units='kg')
     
 It is more convinient to use the PropertyFactory as a decorator:
 
 .. code-block:: python
    
-    >>> @PropertyFactory
+    >>> @PropertyFactory(units='kg')
     >>> def Weight(self):
     ...    '''Weight (kg) based on volume (m^3).'''
     ...    data = self.data
@@ -126,13 +127,16 @@ In place magic methods will also change the property value:
     >>> water_data  # The change also affects the original data
     {'rho': 1000, 'vol': 3}
     
-Use the property_array to manage free_properties as an array:
+Use the property_array to manage free properties as an array:
            
 .. code-block:: python
    
+   >>> from free_properties import property_array
    >>> prop_arr = property_array([weight_water, weight_ethanol])
    >>> prop_arr
    property_array([<Water: 3000 kg>, <Ethanol: 2367 kg>], dtype=object)
+   >>> prop_arr.sum()
+   5367.0
    
 Changing the values of a property_array changes the value of its properties:
    
