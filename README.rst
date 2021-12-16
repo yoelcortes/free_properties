@@ -92,9 +92,9 @@ Create dictionaries of data and initialize new Weight objects:
    >>> weight_water = Weight('Water', water_data)
    >>> weight_ethanol = Weight('Ethanol', ethanol_data)
    >>> weight_water
-   <Weight(Water): 3000 kg>
+   <Water: 3000 kg>
    >>> weight_ethanol
-   <Weight(Ethanol): 2367 kg>
+   <Ethanol: 2367 kg>
 
 These properties behave just like their dynamic value:
 
