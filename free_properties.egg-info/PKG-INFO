@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: free-properties
-Version: 0.2.7
+Version: 0.3.0
 Summary: Manage properties outside a class
 Home-page: https://github.com/yoelcortes/free_properties
 Author: Yoel Cortes-Pena
@@ -104,9 +104,9 @@ Create dictionaries of data and initialize new Weight objects:
    >>> weight_water = Weight('Water', water_data)
    >>> weight_ethanol = Weight('Ethanol', ethanol_data)
    >>> weight_water
-   <Weight(Water): 3000 kg>
+   <Water: 3000 kg>
    >>> weight_ethanol
-   <Weight(Ethanol): 2367 kg>
+   <Ethanol: 2367 kg>
 
 These properties behave just like their dynamic value:
 
@@ -146,7 +146,7 @@ Use the property_array to manage free properties as an array:
    >>> from free_properties import property_array
    >>> prop_arr = property_array([weight_water, weight_ethanol])
    >>> prop_arr
-   property_array([<Water: 3000 kg>, <Ethanol: 2367 kg>], dtype=object)
+   property_array([3000.0, 2367.0], dtype=object)
    >>> prop_arr.sum()
    5367.0
    
@@ -157,7 +157,7 @@ Changing the values of a property_array changes the value of its properties:
    >>> # Addition in place
    >>> prop_arr += 3000
    >>> prop_arr
-   property_array([<Water: 6000 kg>, <Ethanol: 5367 kg>], dtype=object)
+   property_array([6000.0, 5367.0], dtype=object)
    >>> # Note how the data also changes
    >>> water_data
    {'rho': 1000, 'vol': 6.0}

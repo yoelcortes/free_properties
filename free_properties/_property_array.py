@@ -179,7 +179,7 @@ class property_array(ndarray):
     
     def __getitem__(self, key):
         item = ndarray.__getitem__(self, key)
-        if item.base is None:
+        if item.base is not self:
             return item.value
         else:
             return item
