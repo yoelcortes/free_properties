@@ -11,4 +11,4 @@ from ._free_property import FreeProperty
 from ._property_factory import PropertyFactory
 from ._property_array import property_array
 
-__version__ = '0.3.2'
+__version__ = '0.3.3'

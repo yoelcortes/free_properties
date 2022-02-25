@@ -179,10 +179,10 @@ class property_array(ndarray):
     
     def __getitem__(self, key):
         item = self.base[key]
-        if item.base:
-            return item
-        else:
+        if item.base is None:
             return np.array(item, float)
+        else:
+            return item
     
     def __setitem__(self, key, value):
         items = self.base[key]
