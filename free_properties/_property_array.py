@@ -181,13 +181,13 @@ class property_array(ndarray):
         base_og = self.base
         item = base_og[key]
         base = item.base
-        if base is base_og:
-            return item.view(property_array)
-        elif base is None:
+        if base is None:
             return np.array(item, float)
-        else: # Must be a free property
+        elif base.base is base: # Must be a free property
             return item.value
-    
+        else: # Must be a property array
+            return item.view(property_array)
+        
     def __setitem__(self, key, value):
         items = self.base[key]
         if isa(items, ndarray):
