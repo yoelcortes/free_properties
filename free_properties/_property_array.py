@@ -178,8 +178,7 @@ class property_array(ndarray):
         return self.value.var(*args, **kwargs)
     
     def __getitem__(self, key):
-        base_og = self.base
-        item = base_og[key]
+        item = self.base[key]
         base = item.base
         if base is None:
             return np.array(item, float)
