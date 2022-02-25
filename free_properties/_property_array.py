@@ -178,11 +178,15 @@ class property_array(ndarray):
         return self.value.var(*args, **kwargs)
     
     def __getitem__(self, key):
-        item = self.base[key]
-        if item.base is None:
+        base_og = self.base
+        item = base_og[key]
+        base = item.base
+        if base is base_og:
+            return item.view(property_array)
+        elif base is None:
             return np.array(item, float)
-        else:
-            return item
+        else: # Must be a free property
+            return item.value
     
     def __setitem__(self, key, value):
         items = self.base[key]

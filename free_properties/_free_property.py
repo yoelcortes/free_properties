@@ -70,7 +70,7 @@ class FreeProperty(metaclass=metaProperty):
     
     @property
     def base(self):
-        return None
+        return self
     
     def __init__(self, *args, **kwargs):
         setfield = setattr
