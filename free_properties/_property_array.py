@@ -178,14 +178,14 @@ class property_array(ndarray):
         return self.value.var(*args, **kwargs)
     
     def __getitem__(self, key):
-        item = ndarray.__getitem__(self, key)
-        if item.base is not self:
-            return item.value
-        else:
+        item = self.base[key]
+        if item.base:
             return item
+        else:
+            return np.array(item, float)
     
     def __setitem__(self, key, value):
-        items = ndarray.__getitem__(self, key)
+        items = self.base[key]
         if isa(items, ndarray):
             for i, v in np.nditer((items, value), flags=('refs_ok', 'zerosize_ok')):
                 i.item().value = v 
