@@ -65,7 +65,7 @@ class property_array(ndarray):
    
        >>> prop_arr = property_array([weight_water, weight_ethanol])
        >>> prop_arr
-       property_array([<Water: 3000 kg>, <Ethanol: 2367 kg>])
+       property_array([3000.0, 2367.0])
        
     Changing the values of a property_array changes the value of its properties:
        
@@ -74,7 +74,7 @@ class property_array(ndarray):
        >>> # Addition in place
        >>> prop_arr += 3000
        >>> prop_arr
-       property_array([<Water: 6000 kg>, <Ethanol: 5367 kg>])
+       property_array([6000.0, 5367.0])
        >>> # Note how the data also changes
        >>> water_data
        {'rho': 1000, 'vol': 6.0}
@@ -127,10 +127,10 @@ class property_array(ndarray):
         return self.value.clip(*args, **kwargs)
     
     def conj(self):
-        return self.values.conj()
+        return self.value.conj()
     
     def conjugate(self):
-        return self.values.conjugate()
+        return self.value.conjugate()
     
     def cumprod(self, *args, **kwargs):
         return self.value.cumprod(*args, **kwargs)
@@ -177,8 +177,15 @@ class property_array(ndarray):
     def var(self, *args, **kwargs):
         return self.value.var(*args, **kwargs)
     
+    def __getitem__(self, key):
+        item = ndarray.__getitem__(self, key)
+        if item.base is None:
+            return item.value
+        else:
+            return item
+    
     def __setitem__(self, key, value):
-        items = self[key]
+        items = ndarray.__getitem__(self, key)
         if isa(items, ndarray):
             for i, v in np.nditer((items, value), flags=('refs_ok', 'zerosize_ok')):
                 i.item().value = v 

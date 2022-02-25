@@ -68,6 +68,10 @@ class FreeProperty(metaclass=metaProperty):
     __slots__ = ()
     _units = ''
     
+    @property
+    def base(self):
+        return None
+    
     def __init__(self, *args, **kwargs):
         setfield = setattr
         for i, j in zip(self.__slots__, args): setfield(self, i, j)

@@ -134,7 +134,7 @@ Use the property_array to manage free properties as an array:
    >>> from free_properties import property_array
    >>> prop_arr = property_array([weight_water, weight_ethanol])
    >>> prop_arr
-   property_array([<Water: 3000 kg>, <Ethanol: 2367 kg>], dtype=object)
+   property_array([3000.0, 2367.0], dtype=object)
    >>> prop_arr.sum()
    5367.0
    
@@ -145,7 +145,7 @@ Changing the values of a property_array changes the value of its properties:
    >>> # Addition in place
    >>> prop_arr += 3000
    >>> prop_arr
-   property_array([<Water: 6000 kg>, <Ethanol: 5367 kg>], dtype=object)
+   property_array([6000.0, 5367.0], dtype=object)
    >>> # Note how the data also changes
    >>> water_data
    {'rho': 1000, 'vol': 6.0}
