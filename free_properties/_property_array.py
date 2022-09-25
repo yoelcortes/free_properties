@@ -103,79 +103,82 @@ class property_array(ndarray):
         return np.array(self, float)
     
     def all(self, *args, **kwargs):
-        return self.value.all(*args, **kwargs)
+        return np.array(self, float).all(*args, **kwargs)
     
     def any(self, *args, **kwargs):
-        return self.value.any(*args, **kwargs)
+        return np.array(self, float).any(*args, **kwargs)
+    
+    def copy(self):
+        return np.array(self, float)
     
     def argmax(self, *args, **kwargs):
-        return self.value.argmax(*args, **kwargs)
+        return np.array(self, float).argmax(*args, **kwargs)
     
     def argmin(self, *args, **kwargs):
-        return self.value.argmin(*args, **kwargs)
+        return np.array(self, float).argmin(*args, **kwargs)
     
     def argpartition(self, *args, **kwargs):
-        return self.value.argpartition(*args, **kwargs)
+        return np.array(self, float).argpartition(*args, **kwargs)
     
     def argsort(self, *args, **kwargs):
-        return self.value.argsort(*args, **kwargs)
+        return np.array(self, float).argsort(*args, **kwargs)
     
     def choose(self, *args, **kwargs):
-        return self.value.choose(*args, **kwargs)
+        return np.array(self, float).choose(*args, **kwargs)
     
     def clip(self, *args, **kwargs):
-        return self.value.clip(*args, **kwargs)
+        return np.array(self, float).clip(*args, **kwargs)
     
     def conj(self):
-        return self.value.conj()
+        return np.array(self, float).conj()
     
     def conjugate(self):
-        return self.value.conjugate()
+        return np.array(self, float).conjugate()
     
     def cumprod(self, *args, **kwargs):
-        return self.value.cumprod(*args, **kwargs)
+        return np.array(self, float).cumprod(*args, **kwargs)
     
     def cumsum(self, *args, **kwargs):
-        return self.value.cumsum(*args, **kwargs)
+        return np.array(self, float).cumsum(*args, **kwargs)
     
     def dot(self, *args, **kwargs):
-        return self.value.dot(*args, **kwargs)
+        return np.array(self, float).dot(*args, **kwargs)
     
     def max(self, *args, **kwargs):
-        return self.value.max(*args, **kwargs)
+        return np.array(self, float).max(*args, **kwargs)
     
     def mean(self, *args, **kwargs):
-        return self.value.mean(*args, **kwargs)
+        return np.array(self, float).mean(*args, **kwargs)
     
     def min(self, *args, **kwargs):
-        return self.value.min(*args, **kwargs)
+        return np.array(self, float).min(*args, **kwargs)
     
     def nonzero(self, *args, **kwargs):
-        return self.value.nonzero(*args, **kwargs)
+        return np.array(self, float).nonzero(*args, **kwargs)
     
     def prod(self, *args, **kwargs):
-        return self.value.prod(*args, **kwargs)
+        return np.array(self, float).prod(*args, **kwargs)
     
     def ptp(self, *args, **kwargs):
-        return self.value.ptp(*args, **kwargs)
+        return np.array(self, float).ptp(*args, **kwargs)
     
     def put(self, *args, **kwargs):
-        return self.value.put(*args, **kwargs)
+        return np.array(self, float).put(*args, **kwargs)
     
     def round(self, *args, **kwargs):
-        return self.value.round(*args, **kwargs)
+        return np.array(self, float).round(*args, **kwargs)
     
     def std(self, *args, **kwargs):
-        return self.value.std(*args, **kwargs)
+        return np.array(self, float).std(*args, **kwargs)
     
     def sum(self, *args, **kwargs):
-        return self.value.sum(*args, **kwargs)
+        return np.array(self, float).sum(*args, **kwargs)
     
     def trace(self, *args, **kwargs):
-        return self.value.trace(*args, **kwargs)
+        return np.array(self, float).trace(*args, **kwargs)
     
     def var(self, *args, **kwargs):
-        return self.value.var(*args, **kwargs)
+        return np.array(self, float).var(*args, **kwargs)
     
     def __getitem__(self, key):
         item = self.base[key]
@@ -196,132 +199,132 @@ class property_array(ndarray):
             items.value = value
     
     def __add__(self, other):
-        return self.value + other
+        return np.array(self, float) + other
     
     def __sub__(self, other):
-        return self.value - other
+        return np.array(self, float) - other
     
     def __mul__(self, other):
-        return self.value * other
+        return np.array(self, float) * other
     
     def __matmul__(self, other):
-        return self.value @ other
+        return np.array(self, float) @ other
     
     def __truediv__(self, other):
-        return self.value / other
+        return np.array(self, float) / other
     
     def __floordiv__(self, other):
-        return self.value // other
+        return np.array(self, float) // other
     
     def __mod__(self, other):
-        return self.value % other
+        return np.array(self, float) % other
     
     def __pow__(self, other):
-        return self.value ** other
+        return np.array(self, float) ** other
     
     def __lshift__(self, other):
-        return self.value << other
+        return np.array(self, float) << other
     
     def __rshift__(self, other):
-        return self.value >> other
+        return np.array(self, float) >> other
     
     def __and__(self, other): 
-        return self.value & other
+        return np.array(self, float) & other
     
     def __xor__(self, other): 
-        return self.value ^ other
+        return np.array(self, float) ^ other
     
     def __or__(self, other):
-        return self.value | other
+        return np.array(self, float) | other
     
     def __radd__(self, other):
-        return other + self.value
+        return other + np.array(self, float)
     
     def __rsub__(self, other):
-        return other - self.value
+        return other - np.array(self, float)
     
     def __rmul__(self, other):
-        return other * self.value
+        return other * np.array(self, float)
     
     def __rmatmul__(self, other):
-        return other @ self.value
+        return other @ np.array(self, float)
     
     def __rtruediv__(self, other):
-        return other / self.value
+        return other / np.array(self, float)
     
     def __rfloordiv__(self, other):
-        return other // self.value
+        return other // np.array(self, float)
     
     def __rmod__(self, other):
-        return other % self.value
+        return other % np.array(self, float)
     
     def __rpow__(self, other):
-        return other ** self.value
+        return other ** np.array(self, float)
     
     def __rlshift__(self, other):
-        return other << self.value 
+        return other << np.array(self, float) 
     
     def __rrshift__(self, other):
-        return other >> self.value
+        return other >> np.array(self, float)
     
     def __rand__(self, other):
-        return other & self.value
+        return other & np.array(self, float)
     
     def __rxor__(self, other):
-        return other ^ self.value
+        return other ^ np.array(self, float)
     
     def __ror__(self, other):
-        return other | self.value
+        return other | np.array(self, float)
     
     def __iadd__(self, other):
-        self[:] = self.value + other
+        self[:] = np.array(self, float) + other
         return self
     
     def __isub__(self, other): 
-        self[:] = self.value - other
+        self[:] = np.array(self, float) - other
         return self
     
     def __imul__(self, other): 
-        self[:] = self.value * other
+        self[:] = np.array(self, float) * other
         return self
     
     def __imatmul__(self, other):
         raise TypeError("in-place matrix multiplication is not (yet) supported")
     
     def __itruediv__(self, other): 
-        self[:] = self.value / other
+        self[:] = np.array(self, float) / other
         return self
     
     def __ifloordiv__(self, other):
-        self[:] = self.value // other
+        self[:] = np.array(self, float) // other
         return self
     
     def __imod__(self, other): 
-        self[:] =self.value % other
+        self[:] =np.array(self, float) % other
         return self
     
-    def __ipow__(self, other): 
-        self[:] = self.value ** other
+    def __ipow__(self, other):
+        self[:] = np.array(self, float) ** other
         return self
     
     def __ilshift__(self, other):
-        self[:] = self.value << other
+        self[:] = np.array(self, float) << other
         return self
     
     def __irshift__(self, other):
-        self[:] = self.value >> other
+        self[:] = np.array(self, float) >> other
         return self
     
     def __iand__(self, other): 
-        self[:] = self & other
+        self[:] = np.array(self, float) & other
         return self
     
     def __ixor__(self, other): 
-        self[:] = self.value ^ other
+        self[:] = np.array(self, float) ^ other
         return self
     
     def __ior__(self, other):
-        self[:] = self.value | other
+        self[:] = np.array(self, float) | other
         return self
 
     def __repr__(self):
